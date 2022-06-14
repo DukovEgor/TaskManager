@@ -1,9 +1,11 @@
 import { Task } from './task';
 
 export type InitialData = {
-  tasks: Task[],
-}
+  tasks: Task[];
+};
 
 export type InitialProcess = {
-  currentEditing: string,
-}
+  currentEditing: boolean;
+  currentSortType: string;
+  currentFilter: string;
+};

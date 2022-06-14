@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { InitialProcess } from '../../types/initial-data';
-import {  NameSpace } from '../../utils/const';
+import { NameSpace } from '../../utils/const';
 
 const initialState: InitialProcess = {
-  currentEditing: '',
+  currentEditing: false,
+  currentSortType: 'default',
+  currentFilter: 'active',
 };
 
 export const appProcess = createSlice({
@@ -13,7 +15,13 @@ export const appProcess = createSlice({
     setCurrentEditing: (state, action) => {
       state.currentEditing = action.payload;
     },
+    setCurrentSortType: (state, action) => {
+      state.currentSortType = action.payload;
+    },
+    setCurrentFilter: (state, action) => {
+      state.currentFilter = action.payload;
+    },
   },
 });
 
-export const { setCurrentEditing } = appProcess.actions;
+export const { setCurrentEditing, setCurrentSortType, setCurrentFilter } = appProcess.actions;
