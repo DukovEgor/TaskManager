@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import { TASKS_TO_SHOW } from '../../utils/const';
 import Header from '../header/header';
+import TaskItemEdit from '../task-item-edit/task-item-edit';
 import TaskItem from '../task-item/task-item';
 
 function App(): JSX.Element {
@@ -14,6 +15,7 @@ function App(): JSX.Element {
       <main className="main">
         <section className="board container">
           <div className="board__tasks">
+            <TaskItemEdit task={tasks[0]}/>
             {tasks.slice(0, toShowCount).map(({id, ...rest}) => <TaskItem key={id} task={{...rest, id}}/>)}
           </div>
           {!(toShowCount >= tasks.length) &&

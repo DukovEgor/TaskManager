@@ -1,15 +1,10 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setCurrentEditing } from '../../store/app-process/app-process';
+import { Task } from '../../types/task';
 import TaskItemEdit from '../task-item-edit/task-item-edit';
 
 interface TaskItemProps {
-  task: {
-    title: string,
-    color: string,
-    date: Date,
-    isArchive: boolean,
-    id: string,
-  },
+  task: Task,
 }
 
 function TaskItem({task}: TaskItemProps): JSX.Element {
@@ -17,15 +12,10 @@ function TaskItem({task}: TaskItemProps): JSX.Element {
   const {currentEditing} = useAppSelector(({process}) => process);
   const dispatch = useAppDispatch();
 
-  const taskDate = date.toLocaleString('ru-RU', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
 
   return (
-    currentEditing === id ? <TaskItemEdit/> :
-      <article className={`card card--${color} ${isArchive && 'card--repeat'}`}>
+    currentEditing === id ? <TaskItemEdit key={`${id  }edit`} task={task}/> :
+      <article key={`${id  }card`} className={`card card--${color} ${isArchive && 'card--repeat'}`}>
         <div className="card__form">
           <div className="card__inner">
             <div className="card__control">
@@ -48,7 +38,7 @@ function TaskItem({task}: TaskItemProps): JSX.Element {
               <div className="card__details">
                 <div className="card__dates">
                   <div className="card__date-deadline">
-                    <p className="card__input-deadline-wrap card__date">{taskDate.replace('г.', '')}
+                    <p className="card__input-deadline-wrap card__date">{date}
                     </p>
                   </div>
                 </div>

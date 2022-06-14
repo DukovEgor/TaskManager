@@ -1,7 +1,7 @@
 export type Task = {
   title: string,
   color: string,
-  date: Date,
+  date: string,
   isArchive: boolean,
   id: string,
 }
