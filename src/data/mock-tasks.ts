@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import { Task } from '../types/task';
 import { formatDate } from '../utils/format-date';
 import { getRandomDate } from '../utils/random-date';
@@ -7,7 +7,7 @@ export const MOCK_TASKS: Task[] = [
   {
     title: 'Example task with default color.',
     date: getRandomDate(),
-    isArchive: false,
+    isArchive: true,
     id: nanoid(),
   },
   {
@@ -62,7 +62,6 @@ export const MOCK_TASKS: Task[] = [
 
 export const INITIAL_TASK = {
   title: '',
-  color: '',
   isArchive: false,
   id: nanoid(),
   date: formatDate(new Date()),

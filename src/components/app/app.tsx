@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import { TASKS_TO_SHOW } from '../../utils/const';

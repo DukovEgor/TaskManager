@@ -26,7 +26,10 @@ export const appData = createSlice({
         findedTask.isArchive = false;
       }
     },
+    clearArchive: (state) => {
+      state.tasks = state.tasks.filter((task) => !task.isArchive);
+    },
   },
 });
 
-export const { addTask, setTaskArchive, setTaskActive } = appData.actions;
+export const { addTask, setTaskArchive, setTaskActive, clearArchive } = appData.actions;

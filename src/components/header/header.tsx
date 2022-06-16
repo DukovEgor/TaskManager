@@ -1,4 +1,5 @@
 import { useAppDispatch } from '../../hooks';
+import { clearArchive } from '../../store/app-data/app-data';
 import { setCurrentEditing, setCurrentFilter, setCurrentSortType } from '../../store/app-process/app-process';
 import { Task } from '../../types/task';
 import { getFilteredTasks } from '../../utils/filter';
@@ -24,6 +25,9 @@ function Header({ tasks, currentSortType, currentFilter }: HeaderProps) {
           <input type='radio' name='control' id='control__new-task' className='control__input visually-hidden' />
           <button className='control__label control__label--new-task' onClick={() => dispatch(setCurrentEditing(true))}>
             + ДОБАВИТЬ ЗАДАЧУ
+          </button>
+          <button className='control__label control__label--new-task' onClick={() => dispatch(clearArchive())}>
+            УДАЛИТЬ ЗАВЕРШЕННЫЕ
           </button>
           <input type='radio' name='control' id='control__task' className='control__input visually-hidden' defaultChecked />
           <label htmlFor='control__task' className='control__label'>

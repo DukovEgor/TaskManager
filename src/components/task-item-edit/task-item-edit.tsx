@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { INITIAL_TASK } from '../../data/mock-tasks';
 import { useAppDispatch } from '../../hooks';
@@ -8,7 +8,7 @@ import { Task } from '../../types/task';
 
 function TaskItemEdit(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { title, color } = INITIAL_TASK;
+  const { title } = INITIAL_TASK;
 
   const {
     register,
@@ -21,7 +21,7 @@ function TaskItemEdit(): JSX.Element {
   };
 
   return (
-    <article className={`card card--edit card--${color}`}>
+    <article className={'card card--edit card--blue'}>
       <form className='card__form' onSubmit={handleSubmit(onSubmit)}>
         <div className='card__inner'>
           <div className='card__color-bar'>

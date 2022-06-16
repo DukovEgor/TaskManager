@@ -13,17 +13,17 @@ function TaskItem({ task }: TaskItemProps): JSX.Element {
   const taskDate = formatDate(date);
 
   return (
-    <article key={`${id}card`} className={`card card--black ${isArchive && 'card--repeat'}`}>
+    <article key={`${id}card`} className={`card card--${isArchive ? 'pink card--repeat' : 'blue'}`}>
       <div className='card__form'>
         <div className='card__inner'>
           <div className='card__control'>
             {!isArchive && (
-              <button type='button' className='card__btn card__btn--archive' onClick={() => dispatch(setTaskArchive(id))}>
+              <button type='button' className='card__btn card__btn--archive' data-testid='to-archive' onClick={() => dispatch(setTaskArchive(id))}>
                 Завершить
               </button>
             )}
             {isArchive && (
-              <button type='button' className='card__btn card__btn--archive' onClick={() => dispatch(setTaskActive(id))}>
+              <button type='button' className='card__btn card__btn--archive' data-testid='to-active' onClick={() => dispatch(setTaskActive(id))}>
                 Возобновить
               </button>
             )}
