@@ -1,4 +1,5 @@
 # Руководство по работе с проектом
+Продакшн-версию можно посмотреть тут [TaskManager](https://dukov-task-manager.vercel.app/);
 
 Данный проект создан с помощью [Create React App](https://github.com/facebook/create-react-app).
 
