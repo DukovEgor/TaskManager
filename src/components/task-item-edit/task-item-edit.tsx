@@ -1,6 +1,6 @@
 import { nanoid } from '@reduxjs/toolkit';
+import { KeyboardEventHandler } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { INITIAL_TASK } from '../../data/mock-tasks';
 import { useAppDispatch } from '../../hooks';
 import { addTask } from '../../store/app-data/app-data';
 import { setCurrentEditing } from '../../store/app-process/app-process';
@@ -8,21 +8,36 @@ import { Task } from '../../types/task';
 
 function TaskItemEdit(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { title } = INITIAL_TASK;
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<Task>({ mode: 'onSubmit' });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    dispatch(addTask({ ...data, date: new Date().toISOString(), isArchive: false, id: nanoid(25) }));
+  const onSubmit: SubmitHandler<FieldValues> = ({ title }) => {
+    if (!title.trim()) {
+      return;
+    }
+    dispatch(addTask({ title, date: new Date().toISOString(), isArchive: false, id: nanoid(25) }));
+  };
+
+  const handleKeyDown: KeyboardEventHandler = (evt) => {
+    if (evt.code === 'Escape') {
+      dispatch(setCurrentEditing(false));
+    }
+    if (!getValues().title.trim()) {
+      return;
+    }
+    if (evt.code === 'Enter') {
+      dispatch(addTask({ ...getValues(), date: new Date().toISOString(), isArchive: false, id: nanoid(25) }));
+    }
   };
 
   return (
     <article className={'card card--edit card--blue'}>
-      <form className='card__form' onSubmit={handleSubmit(onSubmit)}>
+      <form className='card__form' onSubmit={handleSubmit(onSubmit)} onKeyDown={handleKeyDown}>
         <div className='card__inner'>
           <div className='card__color-bar'>
             <svg className='card__color-bar-wave' width='100%' height={10}>
@@ -34,7 +49,6 @@ function TaskItemEdit(): JSX.Element {
               <textarea
                 className='card__text'
                 placeholder='Начните что-нибудь писать...'
-                defaultValue={title}
                 id='edit-textarea'
                 {...register('title', {
                   required: true,
