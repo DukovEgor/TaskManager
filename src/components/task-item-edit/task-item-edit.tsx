@@ -50,6 +50,7 @@ function TaskItemEdit(): JSX.Element {
               <textarea
                 className='card__text'
                 placeholder='Начните что-нибудь писать...'
+                autoFocus
                 id='edit-textarea'
                 {...register('title', {
                   required: true,
