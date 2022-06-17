@@ -13,7 +13,7 @@ function TaskItemEdit(): JSX.Element {
     register,
     handleSubmit,
     getValues,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<Task>({ mode: 'onSubmit' });
 
   const onSubmit: SubmitHandler<FieldValues> = ({ title }) => {
@@ -25,6 +25,7 @@ function TaskItemEdit(): JSX.Element {
 
   const handleKeyDown: KeyboardEventHandler = (evt) => {
     if (evt.code === 'Escape') {
+      evt.preventDefault();
       dispatch(setCurrentEditing(false));
     }
     if (!getValues().title.trim()) {
@@ -59,7 +60,7 @@ function TaskItemEdit(): JSX.Element {
             {errors.title && <p className='error__message'>Длина заголовка должна быть не менее 1 символа</p>}
           </div>
           <div className='card__status-btns'>
-            <button className='card__save' type='submit'>
+            <button className='card__save' type='submit' disabled={!isDirty}>
               сохранить
             </button>
             <button className='card__delete' type='button' onClick={() => dispatch(setCurrentEditing(false))}>
